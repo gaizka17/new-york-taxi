@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Add Your favicon here -->
+    <!--<link rel="icon" href="img/favicon.ico">-->
+
+    <title>Antolin</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Animation CSS -->
+    <link href="css/animate.min.css" rel="stylesheet">
+
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body id="page-top">
+
+<section id="login" class="navy-section testimonials" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center wow zoomIn">
+                <h1>New york - Taxi</h1>
+            </div>
+        </div>
+    </div>
+</section>
+        
+<section class="comments gray-section" style="background: #333">
+    <div class="container">
+        <div class="row text-center">
+    <div class="row text-center">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <div>
+                <h1 class="logo-name">Predictive Maintenance Tool</h1>
+            </div>
+            <p>Login in. To see it in action.</p>
+            <form class="m-t" role="form" onsubmit="return DoLogin()">
+                <div class="form-group">
+                    <input id="user" type="text" class="form-control" placeholder="Username" required="" value="">
+                </div>
+                <div class="form-group">
+                    <input id="password" type="password" class="form-control" placeholder="Password" required="" value="">
+                </div>
+				<div id="loginResult" class="alert alert-danger" style="display:none">Invalid username/password</div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+            </form>
+        </div>
+    </div>
+        </div>    
+    </div>    
+</section>
+
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/pace.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/classie.js"></script>
+<script src="js/cbpAnimatedHeader.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/inspinia.js"></script>
+<script>
+function DoLogin() {
+	var url = 'http://pm.smartfactory.grupoantolin.com/api/pla/do-login';
+	var xmlhttp = new XMLHttpRequest();
+
+	xmlhttp.onreadystatechange = function() {
+		if ( xmlhttp.readyState == 4 ) {
+			if ( xmlhttp.status == 200 ) {
+				var loginResult = JSON.parse(xmlhttp.responseText);
+				if ( loginResult.result ) {
+					window.location = "app";
+				} else {
+					var loginResultDiv = document.getElementById("loginResult");
+					loginResultDiv.style.display = "block";
+				}
+			}
+		}
+	};
+	xmlhttp.open("GET", url, true);
+    xmlhttp.setRequestHeader("Authorization", "Basic " + btoa(document.getElementById("user").value+":"+document.getElementById("password").value)); //esto estas probando
+	xmlhttp.send(null);
+	return false;
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="AnalitycsCtrl as analitycsCtrl">
+    <div class="row white-bg text-center" style="z-index: 999;padding: 20px 20px 15px 20px;" ng-controller="DateCtrl as dates">
+        <div class="col-sm-12">
+            <div class="pull-left m-b-xs">
+                <div class="btn-group">
+                    <label for="day" class="btn btn-sm"
+                        ng-class="dates.period == 'day' ? 'btn-primary' : 'btn-white'">
+                        <input type="radio" id="day" ng-change="dates.updateLabel()"
+                        ng-model="dates.period" name="options" value="day"
+                        style="display: none"> Day
+                    </label> <label for="week" class="btn btn-sm"
+                        ng-class="dates.period == 'week' ? 'btn-primary' : 'btn-white'">
+                        <input type="radio" id="week" ng-change="dates.updateLabel()"
+                        name="options" ng-model="dates.period" value="week"
+                        style="display: none"> Week
+                    </label> <label for="month" class="btn btn-sm"
+                        ng-class="dates.period == 'month' ? 'btn-primary' : 'btn-white'">
+                        <input type="radio" id="month" ng-change="dates.updateLabel()"
+                        name="options" ng-model="dates.period" value="month"
+                        style="display: none"> Month
+                    </label>
+                </div>
+            </div>
+            <div class="text-center" style="display: inline-block;">
+                <div uib-dropdown id="dropDownCalendar">
+                    <h3>
+                        <a uib-dropdown-toggle id="aCalendar">
+                            {{dates.currentDayLabel}} <span class="caret"></span>
+                        </a>
+                    </h3>
+                    <div uib-dropdown-menu="" id="menuCalendar"
+                        ng-click="$event.preventDefault();$event.stopPropagation()">
+                        <div date-picker ng-model="dates.currentDay"
+                            ng-change="dates.updateLabel(dates.currentDay)" auto-close="true"
+                            view="date" min-view="date" max-view="date" first-day="1"
+                            max-date="maxDate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pull-right">
+                <div class="pull-right">
+                    <div data-toggle="buttons" class="btn-group">
+                        <button type="button" class="btn btn-sm btn-white"
+                            ng-click="dates.goBack()">
+                            <i class="fa fa-chevron-left"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-white"
+                            ng-disabled="dates.bThisPeriod" ng-click="dates.goForward()">
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-sm"
+                        ng-class="dates.bThisPeriod ? 'btn-primary' : 'btn-white'"
+                        ng-click="dates.goToday()">{{ dates.todayBtnStr }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </br>
+    <div class="row white-bg text-center" style="z-index: 999;padding: 20px 20px 15px 20px;">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <center><h2><img src="img/timeline.svg" height="26"/>Pressures</h2></center>
+                    <ibox-tools data-config="false" data-close="false"></ibox-tools>
+                    <div class="ibox-content">
+                        <div id="timeline">
+                            <timelineii data-timeline="timeline"></timeline>
+                        </div>
+                        <div class="timeline-overlay" tabindex="-1" style="opacity: 0; display: none;"></div>
+                        <div class="timeline-panel" tabindex="-1" style="" ng-show="show_timeline_panel">
+                            <div class="font-bold m"></div>
+                            <div class="row m-t-lg">
+                                <div class="col-sm-12">
+                                    <button type="button"
+                                        class="btn btn-primary btn-sm variables-download-button"{{action "close_timeline_panel"}}>
+                                        <div class="centered">
+                                            <i class="fa-4x pe-7s-close" style="padding: 0 1rem;"></i>
+                                            <h3 style="padding-right: 0.5rem;">Close</h3>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </br>
+    <div class="row white-bg text-center" style="z-index: 999;padding: 20px 20px 15px 20px;">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <center><h2><img src="img/timeline.svg" height="26"/>Hydraulic Power Unit Energy</h2></center>
+                    <ibox-tools data-config="false" data-close="false"></ibox-tools>
+                    <div id="flot-group" style="width: 1400; height: 200px; margin-left: 43px; margin-right: 7px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </br>
+    </br>
+</div>
