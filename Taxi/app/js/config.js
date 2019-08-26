@@ -7,7 +7,7 @@
  *
  */
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
-    $urlRouterProvider.otherwise("/menuprincipal");
+    $urlRouterProvider.otherwise("/indexSystem/mainSystem");
 
     $ocLazyLoadProvider.config({
         // Set to true if you want to see what and when is dynamically loaded
@@ -15,6 +15,51 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     });
 
     $stateProvider
+        .state('indexSystem', {
+                abstract: true,
+                url: "/indexSystem",
+                templateUrl: "views/common/contentSystem.html",
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            {
+                                serie: true,
+                                name: 'datePicker',
+                                files: ['js/plugins/moment/moment.min.js',
+                                        'css/plugins/datapicker/angular-datapicker.css',
+                                        'js/plugins/datapicker/angular-datepicker.js']
+                            },
+                            {
+                                insertBefore: '#loadBefore',
+                                name: 'toaster',
+                                files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                            }
+                        ]);
+                    }
+                }
+            })
+        .state('indexSystem.mainSystem', {
+                url: "/mainSystem",
+                templateUrl: "views/system/main.html",
+                data: { pageTitle: 'Now!' },
+                resolve: {
+                    loadPlugin: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            {
+                                serie: true,
+                                name: 'datatables',
+                                files: ['js/plugins/dataTables/angular-datatables.min.js',
+                                        'js/plugins/dataTables/dom-text.js']
+                            },
+                            {
+                                serie: true,
+                                name: 'datatables.buttons',
+                                files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                            }
+                   ]);
+            }
+            }
+            })
         .state('menuprincipal', {
             url: "/menuprincipal",
             templateUrl: "views/mp31/index.html",
