@@ -19,6 +19,12 @@
                         name="options" ng-model="dates.period" value="month"
                         style="display: none"> Month
                     </label>
+                    <label for="year" class="btn btn-sm"
+                        ng-class="dates.period == 'year' ? 'btn-primary' : 'btn-white'">
+                        <input type="radio" id="year" ng-change="dates.updateLabel()"
+                        name="options" ng-model="dates.period" value="year"
+                        style="display: none"> Year
+                    </label>
                 </div>
             </div>
             <div class="text-center" style="display: inline-block;">

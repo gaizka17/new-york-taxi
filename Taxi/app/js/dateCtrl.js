@@ -3,10 +3,10 @@ function DateCtrl($scope, dateService){
     var vm = this;
     vm.currentDay = moment();
     vm.currentDayLabel = '';
-    vm.period = 'month';
+    vm.period = 'year';
     vm.radioModel = '';
     vm.isCalendarVisible = false;
-    vm.todayBtnStr = "This month";
+    vm.todayBtnStr = "This year";
     vm.bThisPeriod = true;
 
     vm.updateLabel = function(){
@@ -39,11 +39,11 @@ function DateCtrl($scope, dateService){
             vm.bThisPeriod = moment().isSame(vm.currentDay, 'week');
         }else{ //month
             if (vm.currentDay.year() == moment().year())
-                vm.currentDayLabel = vm.currentDay.format("MMMM");
+                vm.currentDayLabel = vm.currentDay.format("YYYY");
             else
-                vm.currentDayLabel = vm.currentDay.format("MMMM YYYY");
-            vm.todayBtnStr = "This month";
-            vm.bThisPeriod = moment().isSame(vm.currentDay, 'month');
+                vm.currentDayLabel = vm.currentDay.format("YYYY");
+            vm.todayBtnStr = "This year";
+            vm.bThisPeriod = moment().isSame(vm.currentDay, 'year');
         }
 
         dateService.setDate(vm.currentDay.format("YYYYMMDD"), vm.period);
