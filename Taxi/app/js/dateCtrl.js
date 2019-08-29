@@ -3,13 +3,14 @@ function DateCtrl($scope, dateService){
     var vm = this;
     vm.currentDay = moment();
     vm.currentDayLabel = '';
-    vm.period = 'day';
+    vm.period = 'month';
     vm.radioModel = '';
     vm.isCalendarVisible = false;
-    vm.todayBtnStr = "Today";
+    vm.todayBtnStr = "This month";
     vm.bThisPeriod = true;
 
     vm.updateLabel = function(){
+        console.log("En datectrl")
         if (vm.period == 'day'){
             if (vm.currentDay.year() == moment().year())
                 vm.currentDayLabel = vm.currentDay.format("MMMM D, dddd");
@@ -54,6 +55,7 @@ function DateCtrl($scope, dateService){
     }
 
     vm.goBack = function(){
+        console.log("Estoy aqui dos")
         // Si no lo clonamos, se cambia el dia en la UI del calendario
         vm.currentDay = vm.currentDay.clone();
         if (vm.period == 'day')

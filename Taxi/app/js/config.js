@@ -125,28 +125,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
             }
             }
         })
-        .state('index.minor', {
-            url: "/minor",
-            templateUrl: "views/mp31/minor.html",
-            data: { pageTitle: 'Hidraulica' },
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            serie: true,
-                            name: 'datatables',
-                            files: ['js/plugins/dataTables/angular-datatables.min.js',
-                                    'js/plugins/dataTables/dom-text.js']
-                        },
-                        {
-                            serie: true,
-                            name: 'datatables.buttons',
-                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
-                        }
-               ]);
-        }
-        }
-        })
         .state('index.minor1', {
             url: "/minor1",
             templateUrl: "views/mp31/minor1.html",

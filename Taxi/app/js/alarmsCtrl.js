@@ -4,7 +4,6 @@ function AlarmsCtrl($scope, $http, $window,$timeout,DTOptionsBuilder) {
     var that = this;
     
     this.onLoad = function(){
-        console.log("Here!")
         $("#fileLoader").click();
     }
     $('input[type=file]').change(function () {
@@ -14,7 +13,7 @@ function AlarmsCtrl($scope, $http, $window,$timeout,DTOptionsBuilder) {
     })
     function process_file(){
         $http.get(that.displayUrl).then(function(response) {
-            console.log("Parece que estoy aqui");
+            $window.alert("File is loading, it can take some time");
         })
         .catch(function(e){
         	// handle errors in processing or in error.

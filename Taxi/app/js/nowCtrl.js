@@ -1,19 +1,110 @@
 // function TrendsCtrl($scope, $http, $window, $parse, $compile, dateService, machineService, DTOptionsBuilder, DTColumnDefBuilder, toaster) {
-function NowCtrl($scope, $http,$timeout, DTOptionsBuilder) {
-	this.baseUrl="http://pm.smartfactory.grupoantolin.com/api";
+function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder) {
+	this.baseUrl="http://localhost:8080";
 	var controller = this;
     var that = this;    
+    var vm = this;
+    vm.currentDay = moment();
+    vm.currentDayLabel = '';
+    vm.period = 'month';
+    vm.radioModel = '';
+    vm.isCalendarVisible = false;
+    vm.todayBtnStr = "This month";
+    vm.bThisPeriod = true;
+
+    vm.updateLabel = function(){
+        if (vm.period == 'day'){
+            if (vm.currentDay.year() == moment().year())
+                vm.currentDayLabel = vm.currentDay.format("MMMM D, dddd");
+            else
+                vm.currentDayLabel = vm.currentDay.format("D MMMM YYYY, dddd");
+            vm.todayBtnStr = "Today";
+            vm.bThisPeriod = moment().isSame(vm.currentDay, 'day');
+        }else if (vm.period == 'week'){
+            var weekStart = moment(vm.currentDay);
+            weekStart.startOf('isoWeek');
+            var weekEnd = moment(vm.currentDay);
+            weekEnd.endOf('isoWeek');
+            var label = weekStart.format("D");
+            if (weekStart.month() != weekEnd.month()){
+                label += weekStart.format(" MMMM");
+                if (weekStart.year() != weekEnd.year())
+                    label += weekStart.format(" YYYY");
+            }
+            label += " - ";
+            label += weekEnd.format("D MMMM");
+            if (weekEnd.year() != moment().year() || weekEnd.year() != weekStart.year())
+                label += weekEnd.format(" YYYY");
+
+            vm.currentDayLabel = label;
+            vm.todayBtnStr = "This week";
+            vm.bThisPeriod = moment().isSame(vm.currentDay, 'week');
+        }else{ //month
+            if (vm.currentDay.year() == moment().year())
+                vm.currentDayLabel = vm.currentDay.format("MMMM");
+            else
+                vm.currentDayLabel = vm.currentDay.format("MMMM YYYY");
+            vm.todayBtnStr = "This month";
+            vm.bThisPeriod = moment().isSame(vm.currentDay, 'month');
+        }
+
+        dateService.setDate(vm.currentDay.format("YYYYMMDD"), vm.period);
+    }
+
+    vm.goToday = function(){
+        vm.currentDay = moment();
+        vm.updateLabel();
+    }
+
+    vm.goBack = function(){
+        // Si no lo clonamos, se cambia el dia en la UI del calendario
+        vm.currentDay = vm.currentDay.clone();
+        if (vm.period == 'day')
+            vm.currentDay.subtract(1, 'days');
+        else if (vm.period == 'week')
+            vm.currentDay.subtract(1, 'week');
+        else
+            vm.currentDay.subtract(1, 'month');
+
+        vm.updateLabel();
+    }
+
+    vm.goForward = function() {
+        vm.currentDay = vm.currentDay.clone();
+        if (vm.period == 'day')
+            vm.currentDay.add(1, 'days');
+        else if (vm.period == 'week')
+            vm.currentDay.add(1, 'week');
+        else
+            vm.currentDay.add(1, 'month');
+
+        vm.updateLabel();
+    }
+
+    vm.updateLabel();
+
+    $scope.$on('hidePicker', function(event, mass) {
+        $("#dropDownCalendar").removeClass("open");
+        $("#aCalendar").attr("aria-expanded", "false");
+        $("#menuCalendar").children().removeClass("hidden");
+        $("body").trigger("click");
+    });
+
+    $scope.maxDate = new Date();
     
+    
+    //$http.get(controller.baseUrl + "/production/" + dateService.getPeriod() + "/" + dateService.getDate()).then(function(response) {
     $scope.dtOptions = DTOptionsBuilder.newOptions()
     	.withPaginationType('full_numbers')
 		.withOption('columns', [null,null,null,null,{ "orderDataType": "dom-text", "type": "num" }])
         .withOption('order', []);
+    
     function getLiveData(){
-        $http.get(controller.baseUrl + '/nowPlasbur/mp31').
+        month = dateService.getDate()
+        $http.get(controller.baseUrl + '/now/'+month).
             then(function(response) {
                 that.liveData = response.data;
                 cleanData();
-                
             })
             .catch(function(e){
                 console.log("Problema con la llamada");
@@ -30,64 +121,10 @@ function NowCtrl($scope, $http,$timeout, DTOptionsBuilder) {
                 }
             }
         }
-        
-        var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-        d.setUTCSeconds(that.liveData.ana.start);
-        //d = d.setMilliseconds(0)
-        //that.liveData.int2.start = d.toLocaleDateString()
-        that.liveData.ana.start = d.toLocaleString()
+    
     }
     getLiveData();
-    this.deleteAll = false;
-    this.deleteSpecific = false;
-    that.selected = {};
-    that.selectAll = false;
-    that.toggleAll = toggleAll;
-    that.toggleOne = toggleOne;
     
-    function toggleAll (selectAll, selectedItems) {
-        if (confirm('Are you sure you want to delete every alarm from the database?')) {
-            $http.delete(controller.baseUrl + '/alarms/pla/mp31')
-                    .catch(function(e){
-                        console.log("Problema con la llamada");
-                });
-            $timeout(getLiveData, 2000);
-        }
-//        console.log("toggleAll",selectAll)
-//        for (var id in selectedItems) {
-//            console.log(id)
-//            if (selectedItems.hasOwnProperty(id)) {
-//                selectedItems[id] = selectAll;
-//            }
-//        }
-    }
-    function toggleOne (selectedItems) {
-        if (confirm('Are you sure you want to delete this alarm from the database?')) {
-            // Save it!
-            for (var id in selectedItems) {
-                var ts = id.split(",");
-                var divided = ts[0].split("/")
-                var timeNew = divided[1]+"/"+divided[0]+"/"+divided[2]
-
-                var epoch = new Date(timeNew).getTime()/ 1000;
-
-                $http.delete(controller.baseUrl + '/alarms/pla/'+"?ts="+epoch+"&alarm="+ts[1]).
-                    then(function(response) {
-
-//                        that.alarms = response.data;
-//        //                var table = $('#alarms').DataTable();
-//        //                table.clear().draw();
-//                        cleanData();
-
-                    })
-                    .catch(function(e){
-                        console.log("Problema con la llamada");
-                });
-                $timeout(getLiveData, 2000);
-        }
-    }
-
-    }
 
 }
 

@@ -199,7 +199,7 @@ function MainCtrl($scope, $http, $timeout) {
 
 function DateService($rootScope) {
     var date = moment().format("YYYYMMDD");
-    var period = "day";
+    var period = "month";
 
     return {
         getDate: function () {
