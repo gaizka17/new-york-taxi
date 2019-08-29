@@ -14,11 +14,7 @@ function AlarmsCtrl($scope, $http, $window,$timeout,DTOptionsBuilder) {
     function process_file(){
         $http.get(that.displayUrl).then(function(response) {
             $window.alert("File is loading, it can take some time");
-        })
-        .catch(function(e){
-        	// handle errors in processing or in error.
-        	$window.alert(e.data);
-        });
+        }, AjaxErrorHandler($window, "Error"));
     }
 }
 angular

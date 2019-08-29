@@ -122,11 +122,7 @@ var position = 'right';
 //            else
 //                that.flotMultiOptions = lineOptions;
 //            this.flotMultiOptions = {"xaxes":[{"mode":"time"}],"legend":{"position":"sw"},"colors":["#47ACB1","#F26522","#FFCD33","#676766","#ADD5D7","#F9AA7B","#FFE8AF","#A5A8AA"],"grid":{"color":"#999999","hoverable":true,"clickable":true,"tickColor":"#D4D4D4","borderWidth":0},"tooltip":true,"tooltipOpts":{"content":"%s for %x was %y","xDateFormat":"%y-%m-%d"},"yaxes":[{"label":"Feed.X3"},{"label":"Force.X2"},{"label":"Interval"}]};
-        })
-        .catch(function(e){
-        	// handle errors in processing or in error.
-        	$window.alert(e.data);
-        });
+        }, AjaxErrorHandler($window, "Error"));
     }
     
 

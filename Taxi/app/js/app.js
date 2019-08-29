@@ -16,6 +16,20 @@ function DurationToString(duration) {
 	return retString.trim();
 };
 
+function AjaxErrorHandler($window, dataAccessMsg) {
+	return function(response) {
+        console.log(response.status)
+		switch ( response.status ) {
+		case 401:
+			alert("Session expired / not started");
+			$window.location.href = "/Taxi/";
+			break;
+		default:
+			alert(dataAccessMsg + ": Error " + response.status);
+		}		
+	};
+};
+
 (function () {
     angular.module('inspinia', [
         'ui.router',                    // Routing

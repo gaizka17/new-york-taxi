@@ -15,10 +15,8 @@ function MinorCtrl($scope, $http,$timeout, DTOptionsBuilder) {
                 that.liveData = response.data;
                 cleanData();
                 printSpeed(that.liveData.ana.dist);
-            })
-            .catch(function(e){
-                console.log("Problema con la llamada");
-            });
+            }
+            , AjaxErrorHandler($window, "Error"));
         $timeout(getLiveData, 60000);
     }
     function cleanData(){
@@ -80,10 +78,7 @@ function MinorCtrl($scope, $http,$timeout, DTOptionsBuilder) {
 //        //                table.clear().draw();
 //                        cleanData();
 
-                    })
-                    .catch(function(e){
-                        console.log("Problema con la llamada");
-                });
+                    }, AjaxErrorHandler($window, "Error"));
                 $timeout(getLiveData, 2000);
         }
         }

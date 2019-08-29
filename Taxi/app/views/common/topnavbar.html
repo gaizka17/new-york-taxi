@@ -1,5 +1,5 @@
 <div class="row border-bottom">
-    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0" ng-controller="TopNavController as navCtrl">
         <div class="navbar-header">
             <span minimaliza-sidebar></span>
         </div>
@@ -23,7 +23,7 @@
         </ul>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <a href="/Taxi/">
+                <a href ng-click="navCtrl.DoLogout()">
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
             </li>

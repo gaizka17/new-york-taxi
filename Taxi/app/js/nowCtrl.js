@@ -1,5 +1,5 @@
 // function TrendsCtrl($scope, $http, $window, $parse, $compile, dateService, machineService, DTOptionsBuilder, DTColumnDefBuilder, toaster) {
-function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder) {
+function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder,$window) {
 	this.baseUrl="http://localhost:8080";
 	var controller = this;
     var that = this;    
@@ -105,10 +105,7 @@ function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder) {
             then(function(response) {
                 that.liveData = response.data;
                 cleanData();
-            })
-            .catch(function(e){
-                console.log("Problema con la llamada");
-            });
+            }, AjaxErrorHandler($window, "Error"));
         $timeout(getLiveData, 60000);
     }
     function cleanData(){
