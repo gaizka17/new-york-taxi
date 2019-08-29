@@ -57,27 +57,44 @@ var position = 'right';
     //this.availableVars = [];
     //TODO esto habria que cargarlo desde algun lado
     this.availableVars =  [
-        "MoldSafetyTime_s",
-        "HopperTemp_oC",
-        "CoolingTime_s",
-        "InjectionTime_s",
-        "BarrelZone3Temp_oC",
-        "BarrelZone2Temp_oC",
-        "HeatBalancing101_oC",
-        "MoldStroke_mm",
-        "BarrelZone4Temp_oC",
-        "BarrelZone1Temp_oC",
-        "BarrelZone5Temp_oC",
-        "OilTemp_oC",
-        "HoldingTime_s",
-        "EjectorStroke_mm",
-        "RealLastCycleTime_s",
-        "H1Z501Temp_oC",
-        "PauseTime_s",
-        "HeatBalancing112_oC",
-        "PlastincizingTime_s",
-        "LastCycleTime_s",
-        "dist"
+        "Fare_amount_25",
+        "Fare_amount_50",
+        "Fare_amount_75",
+        "Fare_amount_avg",
+        "Fare_amount_max",
+        "Fare_amount_min",
+        "Fare_amount_std",
+        "Total_amount_25",
+        "Total_amount_50",
+        "Total_amount_75",
+        "Total_amount_avg",
+        "Total_amount_max",
+        "Total_amount_min",
+        "Total_amount_std",
+        "Total_time_25",
+        "Total_time_50",
+        "Total_time_75",
+        "Total_time_avg",
+        "Total_time_max",
+        "Total_time_min",
+        "Total_time_std",
+        "Trip_distance_25",
+        "Trip_distance_50",
+        "Trip_distance_75",
+        "Trip_distance_avg",
+        "Trip_distance_max",
+        "Trip_distance_min",
+        "Trip_distance_std",
+        "car_type",
+        "passenger_25",
+        "passenger_50",
+        "passenger_75",
+        "passenger_avg",
+        "passenger_max",
+        "passenger_min",
+        "passenger_std",
+        "timestamp",
+        "total_trips"
     ];
     this.program = [];
     this.varsToDisplay = [];
@@ -87,14 +104,15 @@ var position = 'right';
     var that = this;
     
     function updateDataUrl(){
+        console.log("Estoy aqui")
         var varsToRequest = that.varsToDisplay.slice(0);
         var programsToRequest = [];
         if (that.xVar != 'time' && that.varsToDisplay.indexOf(that.xVar) < 0)
             varsToRequest.push(that.xVar);
         
-        urlParams = "?vars=" + varsToRequest+"&machine=mp31&db=pla&collection=mp31";
+        urlParams = "?vars=" + varsToRequest;
 
-        that.displayUrl = that.baseUrl + "/trace/" + dateService.getPeriod()+"/"+dateService.getDate()+"/"+urlParams;
+        that.displayUrl = that.baseUrl + "/trace/" +dateService.getDate()+"/"+urlParams;
     }
 
     this.onSelProgChanged = updateDataUrl;
