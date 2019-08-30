@@ -54,6 +54,7 @@ function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder,$window) 
     vm.goToday = function(){
         vm.currentDay = moment();
         vm.updateLabel();
+        getLiveData();
     }
 
     vm.goBack = function(){
@@ -67,6 +68,7 @@ function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder,$window) 
             vm.currentDay.subtract(1, 'month');
 
         vm.updateLabel();
+        getLiveData();
     }
 
     vm.goForward = function() {
@@ -79,6 +81,7 @@ function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder,$window) 
             vm.currentDay.add(1, 'month');
 
         vm.updateLabel();
+        getLiveData();
     }
 
     vm.updateLabel();
@@ -106,7 +109,6 @@ function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder,$window) 
                 that.liveData = response.data;
                 cleanData();
             }, AjaxErrorHandler($window, "Error"));
-        $timeout(getLiveData, 60000);
     }
     function cleanData(){
         const keys = Object.keys(that.liveData)

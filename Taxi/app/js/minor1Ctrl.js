@@ -1,6 +1,6 @@
 // function TrendsCtrl($scope, $http, $window, $parse, $compile, dateService, machineService, DTOptionsBuilder, DTColumnDefBuilder, toaster) {
 function Minor1Ctrl($scope, $http,$timeout,DTOptionsBuilder,dateService,$window) {
-	this.baseUrl="http://pm.smartfactory.grupoantolin.com/api";
+	this.baseUrl="http://localhost:8080";
 	var controller = this;
     var that = this;
     
@@ -104,7 +104,6 @@ var position = 'right';
     var that = this;
     
     function updateDataUrl(){
-        console.log("Estoy aqui")
         var varsToRequest = that.varsToDisplay.slice(0);
         var programsToRequest = [];
         if (that.xVar != 'time' && that.varsToDisplay.indexOf(that.xVar) < 0)
