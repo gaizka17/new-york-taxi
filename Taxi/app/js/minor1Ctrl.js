@@ -93,7 +93,6 @@ var position = 'right';
         "passenger_max",
         "passenger_min",
         "passenger_std",
-        "timestamp",
         "total_trips"
     ];
     this.program = [];

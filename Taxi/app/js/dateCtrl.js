@@ -63,7 +63,7 @@ function DateCtrl($scope, dateService){
         else if (vm.period == 'week')
             vm.currentDay.subtract(1, 'week');
         else
-            vm.currentDay.subtract(1, 'month');
+            vm.currentDay.subtract(1, 'year');
 
         vm.updateLabel();
     }
@@ -75,7 +75,7 @@ function DateCtrl($scope, dateService){
         else if (vm.period == 'week')
             vm.currentDay.add(1, 'week');
         else
-            vm.currentDay.add(1, 'month');
+            vm.currentDay.add(1, 'year');
 
         vm.updateLabel();
     }

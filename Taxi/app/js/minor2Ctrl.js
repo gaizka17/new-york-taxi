@@ -1,7 +1,7 @@
 // function TrendsCtrl($scope, $http, $window, $parse, $compile, dateService, machineService, DTOptionsBuilder, DTColumnDefBuilder, toaster) {
 // function TrendsCtrl($scope, $http, $window, $parse, $compile, dateService, machineService, DTOptionsBuilder, DTColumnDefBuilder, toaster) {
 function Minor2Ctrl($scope, $http,$timeout,DTOptionsBuilder,dateService,$window) {
-	this.baseUrl="http://pm.smartfactory.grupoantolin.com/api";
+	this.baseUrl="http://localhost:8080";
 	var controller = this;
     var that = this;
     
@@ -55,31 +55,46 @@ var position = 'right';
     
     this.progsInPeriod = [];
     //this.progsInPeriod = [{name: "#1 11/06/2019 16:25:35", value: "LOW PROFILE/1560263135_1", type: "LOW PROFILE", $$hashKey: "object:278"}];
-    this.progsInPeriod = ["M-933","M:1011","M-991","M-951","0"];
+    this.progsInPeriod = ["green","yellow","fhv"];
     //this.availableVars = [];
     //TODO esto habria que cargarlo desde algun lado
     this.availableVars =  [
-        "MoldSafetyTime_s",
-        "HopperTemp_oC",
-        "CoolingTime_s",
-        "InjectionTime_s",
-        "BarrelZone3Temp_oC",
-        "BarrelZone2Temp_oC",
-        "HeatBalancing101_oC",
-        "MoldStroke_mm",
-        "BarrelZone4Temp_oC",
-        "BarrelZone1Temp_oC",
-        "BarrelZone5Temp_oC",
-        "OilTemp_oC",
-        "HoldingTime_s",
-        "EjectorStroke_mm",
-        "RealLastCycleTime_s",
-        "H1Z501Temp_oC",
-        "PauseTime_s",
-        "HeatBalancing112_oC",
-        "PlastincizingTime_s",
-        "LastCycleTime_s",
-        "dist"
+        "Fare_amount_25",
+        "Fare_amount_50",
+        "Fare_amount_75",
+        "Fare_amount_avg",
+        "Fare_amount_max",
+        "Fare_amount_min",
+        "Fare_amount_std",
+        "Total_amount_25",
+        "Total_amount_50",
+        "Total_amount_75",
+        "Total_amount_avg",
+        "Total_amount_max",
+        "Total_amount_min",
+        "Total_amount_std",
+        "Total_time_25",
+        "Total_time_50",
+        "Total_time_75",
+        "Total_time_avg",
+        "Total_time_max",
+        "Total_time_min",
+        "Total_time_std",
+        "Trip_distance_25",
+        "Trip_distance_50",
+        "Trip_distance_75",
+        "Trip_distance_avg",
+        "Trip_distance_max",
+        "Trip_distance_min",
+        "Trip_distance_std",
+        "passenger_25",
+        "passenger_50",
+        "passenger_75",
+        "passenger_avg",
+        "passenger_max",
+        "passenger_min",
+        "passenger_std",
+        "total_trips"
     ];
     this.program = [];
     this.varsToDisplay = [];
@@ -94,15 +109,16 @@ var position = 'right';
         if (that.xVar != 'time' && that.varsToDisplay.indexOf(that.xVar) < 0)
             varsToRequest.push(that.xVar);
         for (var i = 0; i < that.program.length; i++)
-            programsToRequest.push(that.program);
+            programsToRequest.push(that.program[i]);
         
-        urlParams = "?vars=" + varsToRequest+"&machine=mp31&db=pla&collection=mp31"+"&mold="+programsToRequest;
+        
+        urlParams = "?vars=" + varsToRequest+"&car="+programsToRequest;
 
-        that.displayUrl = that.baseUrl + "/mold/" + dateService.getPeriod()+"/"+dateService.getDate()+"/"+urlParams;
+        that.displayUrl = that.baseUrl + "/car/" + dateService.getPeriod()+"/"+dateService.getDate()+"/"+urlParams;
     }
 
     this.onSelProgChanged = updateDataUrl;
-
+    
     this.onDisplay = function(){
         $http.get(that.displayUrl).then(function(response) {
             var series = [];
@@ -111,8 +127,15 @@ var position = 'right';
             // Set Y axes. One axis per variable displayed
             var iVar = 0;
             for(var numb in response.data){
+                testo = response.data[numb].label.split("_")
+                if(testo.length>3){
+                    testo = testo[0]+"_"+testo[1]
+                }else{
+                    testo = testo[0]
+                }
                 lineOptions.yaxes[iVar] = {
-            			label: response.data[numb].label,
+            			//label: response.data[numb].label.split("_"),
+                        label: testo,
 						tickFormatter: function(val, axis) { return val < axis.max ? val.toFixed(axis.tickDecimals) : lineOptions.yaxes[axis.n - 1].label; }
             	};
             	iVar++;

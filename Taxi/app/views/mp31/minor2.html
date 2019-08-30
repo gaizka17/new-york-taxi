@@ -3,21 +3,11 @@
         <div class="col-sm-12">
             <div class="pull-left m-b-xs">
                 <div class="btn-group">
-                    <label for="day" class="btn btn-sm"
-                        ng-class="dates.period == 'day' ? 'btn-primary' : 'btn-white'">
-                        <input type="radio" id="day" ng-change="dates.updateLabel()"
-                        ng-model="dates.period" name="options" value="day"
-                        style="display: none"> Day
-                    </label> <label for="week" class="btn btn-sm"
-                        ng-class="dates.period == 'week' ? 'btn-primary' : 'btn-white'">
-                        <input type="radio" id="week" ng-change="dates.updateLabel()"
-                        name="options" ng-model="dates.period" value="week"
-                        style="display: none"> Week
-                    </label> <label for="month" class="btn btn-sm"
-                        ng-class="dates.period == 'month' ? 'btn-primary' : 'btn-white'">
-                        <input type="radio" id="month" ng-change="dates.updateLabel()"
-                        name="options" ng-model="dates.period" value="month"
-                        style="display: none"> Month
+                    <label for="year" class="btn btn-sm"
+                        ng-class="dates.period == 'year' ? 'btn-primary' : 'btn-white'">
+                        <input type="radio" id="year" ng-change="dates.updateLabel()"
+                        name="options" ng-model="dates.period" value="year"
+                        style="display: none"> Year
                     </label>
                 </div>
             </div>
@@ -74,13 +64,13 @@
                         </div>
                     </div>
                     <div class="row" style="margin-left: 0px; margin-right: 0px; margin-bottom: 5px">
-                        <div class="pull-left" style="width: 302px">You can select up to 1 Mold Ref. <b>{{1-main.program.length}} remaining</b></div>
+                        <div class="pull-left" style="width: 302px">You can select up to 3 Taxi Type <b>{{3-main.program.length}} remaining</b></div>
                         <div class="pull-left" style="width: 300px">You can select up to 3 signals. <b>{{3-main.varsToDisplay.length}} remaining</b></div>
                     </div>
                     <div class="row" style="margin-left: 0px; margin-right: 0px; margin-bottom: 15px">
                         <div class="form-inline pull-left">
                             <div class="form-group">
-                                <ui-select multiple ng-model="main.program" ng-change="main.onSelProgChanged()" theme="bootstrap" limit="1" style="width: 300px;">
+                                <ui-select multiple ng-model="main.program" ng-change="main.onSelProgChanged()" theme="bootstrap" limit="3" style="width: 300px;">
                                     <ui-select-match placeholder="{{main.progsInPeriod.length > 0 ? 'Select one or more part programs' : 'No programs in selected period'}}">{{$item}}</ui-select-match>
                                     <ui-select-choices group-by="'type'" repeat="program in main.progsInPeriod | filter:$select.search">
                                         {{program}}
