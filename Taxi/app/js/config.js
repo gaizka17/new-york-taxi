@@ -41,7 +41,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state('indexSystem.mainSystem', {
                 url: "/mainSystem",
                 templateUrl: "views/system/main.html",
-                data: { pageTitle: 'Now!' },
+                data: { pageTitle: 'Info' },
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
@@ -106,7 +106,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state('index.main', {
             url: "/main",
             templateUrl: "views/mp31/main.html",
-            data: { pageTitle: 'Now!' },
+            data: { pageTitle: 'Info' },
             resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([
@@ -158,7 +158,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state('index.minor2', {
             url: "/minor2",
             templateUrl: "views/mp31/minor2.html",
-            data: { pageTitle: 'Mold Log' },
+            data: { pageTitle: 'Time Series' },
             resolve: {
                 loadPlugin: function ($ocLazyLoad) {
                     return $ocLazyLoad.load([
@@ -335,7 +335,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         .state('indexMP32.minor2', {
                 url: "/minor2MP32",
                 templateUrl: "views/mp32/minor2.html",
-                data: { pageTitle: 'Mold log' },
+                data: { pageTitle: 'Time series' },
                 resolve: {
                     loadPlugin: function ($ocLazyLoad) {
                         return $ocLazyLoad.load([

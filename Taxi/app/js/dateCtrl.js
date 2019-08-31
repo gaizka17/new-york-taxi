@@ -11,32 +11,13 @@ function DateCtrl($scope, dateService){
 
     vm.updateLabel = function(){
         console.log("Porque me vienes aqui")
-        if (vm.period == 'day'){
+        if (vm.period == 'all'){
             if (vm.currentDay.year() == moment().year())
-                vm.currentDayLabel = vm.currentDay.format("MMMM D, dddd");
+                vm.currentDayLabel = vm.currentDay.format("MMMM");
             else
-                vm.currentDayLabel = vm.currentDay.format("D MMMM YYYY, dddd");
-            vm.todayBtnStr = "Today";
+                vm.currentDayLabel = vm.currentDay.format("MMMM YYYY");
+            vm.todayBtnStr = "all";
             vm.bThisPeriod = moment().isSame(vm.currentDay, 'day');
-        }else if (vm.period == 'week'){
-            var weekStart = moment(vm.currentDay);
-            weekStart.startOf('isoWeek');
-            var weekEnd = moment(vm.currentDay);
-            weekEnd.endOf('isoWeek');
-            var label = weekStart.format("D");
-            if (weekStart.month() != weekEnd.month()){
-                label += weekStart.format(" MMMM");
-                if (weekStart.year() != weekEnd.year())
-                    label += weekStart.format(" YYYY");
-            }
-            label += " - ";
-            label += weekEnd.format("D MMMM");
-            if (weekEnd.year() != moment().year() || weekEnd.year() != weekStart.year())
-                label += weekEnd.format(" YYYY");
-
-            vm.currentDayLabel = label;
-            vm.todayBtnStr = "This week";
-            vm.bThisPeriod = moment().isSame(vm.currentDay, 'week');
         }else{ //month
             if (vm.currentDay.year() == moment().year())
                 vm.currentDayLabel = vm.currentDay.format("YYYY");
@@ -58,8 +39,8 @@ function DateCtrl($scope, dateService){
         console.log("Estoy aqui dos")
         // Si no lo clonamos, se cambia el dia en la UI del calendario
         vm.currentDay = vm.currentDay.clone();
-        if (vm.period == 'day')
-            vm.currentDay.subtract(1, 'days');
+        if (vm.period == 'all')
+            vm.currentDay.subtract(1, 'month');
         else if (vm.period == 'week')
             vm.currentDay.subtract(1, 'week');
         else

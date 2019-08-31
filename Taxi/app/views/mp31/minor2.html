@@ -10,6 +10,14 @@
                         style="display: none"> Year
                     </label>
                 </div>
+                <div class="btn-group">
+                    <label for="all" class="btn btn-sm"
+                        ng-class="dates.period == 'all' ? 'btn-primary' : 'btn-white'">
+                        <input type="radio" id="all" ng-change="dates.updateLabel()"
+                        name="options" ng-model="dates.period" value="all"
+                        style="display: none"> All
+                    </label>
+                </div>
             </div>
             <div class="text-center" style="display: inline-block;">
                 <div uib-dropdown id="dropDownCalendar">

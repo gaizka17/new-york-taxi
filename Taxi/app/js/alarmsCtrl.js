@@ -13,7 +13,7 @@ function AlarmsCtrl($scope, $http, $window,$timeout,DTOptionsBuilder) {
     })
     function process_file(){
         $http.get(that.displayUrl).then(function(response) {
-            $window.alert("File is loading, it can take some time");
+            $window.alert("File is correctly loaded, thank you for waiting");
         }, AjaxErrorHandler($window, "Error"));
     }
 }
