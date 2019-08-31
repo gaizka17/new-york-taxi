@@ -47,14 +47,14 @@ function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder,$window) 
             vm.todayBtnStr = "This month";
             vm.bThisPeriod = moment().isSame(vm.currentDay, 'month');
         }
-
         dateService.setDate(vm.currentDay.format("YYYYMMDD"), vm.period);
+        getLiveData();
     }
 
     vm.goToday = function(){
         vm.currentDay = moment();
         vm.updateLabel();
-        getLiveData();
+        
     }
 
     vm.goBack = function(){
@@ -68,7 +68,6 @@ function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder,$window) 
             vm.currentDay.subtract(1, 'month');
 
         vm.updateLabel();
-        getLiveData();
     }
 
     vm.goForward = function() {
@@ -81,7 +80,6 @@ function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder,$window) 
             vm.currentDay.add(1, 'month');
 
         vm.updateLabel();
-        getLiveData();
     }
 
     vm.updateLabel();

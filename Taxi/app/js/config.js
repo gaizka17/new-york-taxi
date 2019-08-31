@@ -185,6 +185,36 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
         }
         })
+        .state('index.minor3', {
+            url: "/minor3",
+            templateUrl: "views/mp31/minor3.html",
+            data: { pageTitle: 'Time Series' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js',
+                                    'js/plugins/dataTables/dom-text.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        },
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            name: 'angular-flot',
+                            files: ['js/plugins/flot/angular-flot.js']
+                        }
+               ]);
+        }
+        }
+        })
         .state('index.analitycs', {
             url: "/analitycs",
             templateUrl: "views/mp31/analitycs.html",

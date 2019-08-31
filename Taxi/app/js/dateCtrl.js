@@ -36,7 +36,6 @@ function DateCtrl($scope, dateService){
     }
 
     vm.goBack = function(){
-        console.log("Estoy aqui dos")
         // Si no lo clonamos, se cambia el dia en la UI del calendario
         vm.currentDay = vm.currentDay.clone();
         if (vm.period == 'all')
@@ -51,8 +50,8 @@ function DateCtrl($scope, dateService){
 
     vm.goForward = function() {
         vm.currentDay = vm.currentDay.clone();
-        if (vm.period == 'day')
-            vm.currentDay.add(1, 'days');
+        if (vm.period == 'all')
+            vm.currentDay.add(1, 'month');
         else if (vm.period == 'week')
             vm.currentDay.add(1, 'week');
         else
