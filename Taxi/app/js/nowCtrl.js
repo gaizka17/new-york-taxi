@@ -106,7 +106,7 @@ function NowCtrl($scope, $http,$timeout, dateService, DTOptionsBuilder,$window) 
             then(function(response) {
                 that.liveData = response.data;
                 cleanData();
-            }, AjaxErrorHandler($window, "Error"));
+            });
     }
     function cleanData(){
         const keys = Object.keys(that.liveData)

@@ -59,6 +59,7 @@ var position = 'right';
     //this.availableVars = [];
     //TODO esto habria que cargarlo desde algun lado
     this.availableVars =  [
+        "total_trips",
         "Fare_amount_25",
         "Fare_amount_50",
         "Fare_amount_75",
@@ -93,8 +94,7 @@ var position = 'right';
         "passenger_avg",
         "passenger_max",
         "passenger_min",
-        "passenger_std",
-        "total_trips"
+        "passenger_std"
     ];
     this.program = [];
     this.varsToDisplay = [];
