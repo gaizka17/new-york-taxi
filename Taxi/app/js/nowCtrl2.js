@@ -553,8 +553,55 @@ function NowCtrl2($scope, $http,$timeout, dateService, DTOptionsBuilder,$window)
         });
         chart.render();
         }catch{
-            var elemento = document.getElementById("chartContainer2");
-            elemento.innerHTML = "There is not data in the selected period";
+            try{
+                var chart = new CanvasJS.Chart("chartContainer2", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title:{
+                text: "Trips per hour"
+            },
+            axisY: {
+                title: "Quantity"
+            },
+            data: [{        
+                type: "column",  
+                showInLegend: true, 
+                legendMarkerColor: "grey",
+                legendText: "0- 23 hours",
+                dataPoints: [      
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['0'], label: "0" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['1'],  label: "1" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['2'],  label: "2" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['3'],  label: "3" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['4'],  label: "4" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['5'], label: "5" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['6'],  label: "6" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['7'],  label: "7" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['8'], label: "8" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['9'],  label: "9" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['10'],  label: "10" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['11'],  label: "11" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['12'],  label: "12" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['13'], label: "13" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['14'],  label: "14" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['15'],  label: "15" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['16'], label: "16" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['17'],  label: "17" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['18'],  label: "18" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['19'],  label: "19" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['20'],  label: "20" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['21'], label: "21" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['22'],  label: "22" },
+                    { y: that.liveData.yellow.agrupado2[" total_amount"]['23'],  label: "23" }
+                ]
+            }]
+        });
+        chart.render();
+            }catch{
+                var elemento = document.getElementById("chartContainer2");
+                elemento.innerHTML = "There is not data in the selected period";
+            }
+            
         }
         
         try {
@@ -602,8 +649,55 @@ function NowCtrl2($scope, $http,$timeout, dateService, DTOptionsBuilder,$window)
         });
         chart.render();
         }catch{
-            var elemento = document.getElementById("chartContainer4");
-            elemento.innerHTML = "There is not data in the selected period";
+            try{
+                var chart = new CanvasJS.Chart("chartContainer4", {
+                    animationEnabled: true,
+                    theme: "light2", // "light1", "light2", "dark1", "dark2"
+                    title:{
+                        text: "Passenger qty per hour"
+                    },
+                    axisY: {
+                        title: "Quantity"
+                    },
+                    data: [{        
+                        type: "column",  
+                        showInLegend: true, 
+                        legendMarkerColor: "grey",
+                        legendText: "0- 23 hours",
+                        dataPoints: [      
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['0'], label: "0" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['1'],  label: "1" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['2'],  label: "2" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['3'],  label: "3" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['4'],  label: "4" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['5'], label: "5" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['6'],  label: "6" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['7'],  label: "7" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['8'], label: "8" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['9'],  label: "9" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['10'],  label: "10" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['11'],  label: "11" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['12'],  label: "12" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['13'], label: "13" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['14'],  label: "14" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['15'],  label: "15" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['16'], label: "16" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['17'],  label: "17" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['18'],  label: "18" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['19'],  label: "19" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['20'],  label: "20" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['21'], label: "21" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['22'],  label: "22" },
+                            { y: that.liveData.yellow.agrupado[" passenger_count"]['23'],  label: "23" }
+                        ]
+                    }]
+                });
+                chart.render();
+            }catch{
+                var elemento = document.getElementById("chartContainer4");
+                elemento.innerHTML = "There is not data in the selected period";
+            }
+            
         }
         try {
             var chart = new CanvasJS.Chart("chartContainer6", {
@@ -650,8 +744,54 @@ function NowCtrl2($scope, $http,$timeout, dateService, DTOptionsBuilder,$window)
         });
         chart.render();
         }catch{
-            var elemento = document.getElementById("chartContainer6");
-            elemento.innerHTML = "There is not data in the selected period";
+            try{
+                var chart = new CanvasJS.Chart("chartContainer6", {
+                animationEnabled: true,
+                theme: "light2", // "light1", "light2", "dark1", "dark2"
+                title:{
+                    text: "Income per hour"
+                },
+                axisY: {
+                    title: "$"
+                },
+                data: [{        
+                    type: "column",  
+                    showInLegend: true, 
+                    legendMarkerColor: "grey",
+                    legendText: "0- 23 hours",
+                    dataPoints: [      
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['0'], label: "0" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['1'],  label: "1" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['2'],  label: "2" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['3'],  label: "3" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['4'],  label: "4" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['5'], label: "5" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['6'],  label: "6" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['7'],  label: "7" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['8'], label: "8" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['9'],  label: "9" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['10'],  label: "10" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['11'],  label: "11" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['12'],  label: "12" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['13'], label: "13" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['14'],  label: "14" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['15'],  label: "15" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['16'], label: "16" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['17'],  label: "17" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['18'],  label: "18" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['19'],  label: "19" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['20'],  label: "20" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['21'], label: "21" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['22'],  label: "22" },
+                        { y: that.liveData.yellow.agrupado[" total_amount"]['23'],  label: "23" }
+                    ]
+                }]
+            });
+            chart.render();
+            }catch{
+                var elemento = document.getElementById("chartContainer6");
+                elemento.innerHTML = "There is not data in the selected period";
+            }
         }
         //agrupado.trip_distance
         try {
@@ -698,8 +838,53 @@ function NowCtrl2($scope, $http,$timeout, dateService, DTOptionsBuilder,$window)
                 });
                 chart.render();
         }catch{
-            var elemento = document.getElementById("chartContainer8");
-            elemento.innerHTML = "There is not data in the selected period";
+            try{
+                var chart = new CanvasJS.Chart("chartContainer8", {
+                animationEnabled: true,
+                theme: "light2", // "light1", "light2", "dark1", "dark2"
+                title:{
+                    text: "Trip distance per hour"
+                },
+                axisY: {
+                    title: "miles"
+                },
+                data: [{        
+                    type: "column",  
+                    showInLegend: true, 
+                    legendMarkerColor: "grey",
+                    legendText: "0- 23 hours",
+                    dataPoints: [      
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['0'], label: "0" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['1'],  label: "1" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['2'],  label: "2" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['3'],  label: "3" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['4'],  label: "4" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['5'], label: "5" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['6'],  label: "6" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['7'],  label: "7" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['8'], label: "8" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['9'],  label: "9" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['10'],  label: "10" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['11'],  label: "11" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['12'],  label: "12" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['13'], label: "13" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['14'],  label: "14" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['15'],  label: "15" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['16'], label: "16" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['17'],  label: "17" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['18'],  label: "18" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['19'],  label: "19" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['20'],  label: "20" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['21'], label: "21" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['22'],  label: "22" },
+                        { y: that.liveData.yellow.agrupado[" trip_distance"]['23'],  label: "23" }]
+                        }]
+                    });
+                    chart.render();
+            }catch{
+                var elemento = document.getElementById("chartContainer8");
+                elemento.innerHTML = "There is not data in the selected period";
+            }
         }
     }
     //
