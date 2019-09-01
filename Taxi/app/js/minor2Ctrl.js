@@ -129,17 +129,29 @@ var position = 'right';
             for(var numb in response.data){
                 testo = response.data[numb].label.split("_")
                 if(testo.length>3){
-                    testo = testo[0]+"_"+testo[1]
+                    if(testo[1]=="amount"){
+                        testo = testo[1]
+                    }else{
+                        testo = testo[0]+"_"+testo[1]
+                    }
                 }else{
                     testo = testo[0]
                 }
-                lineOptions.yaxes[iVar] = {
-            			//label: response.data[numb].label.split("_"),
-                        label: testo,
-						tickFormatter: function(val, axis) { return val < axis.max ? val.toFixed(axis.tickDecimals) : lineOptions.yaxes[axis.n - 1].label; }
-            	};
-            	iVar++;
-            }
+                var found = false;
+                for(var i = 0; i < lineOptions.yaxes.length; i++) {
+                    if (lineOptions.yaxes[i].label == testo) {
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found){
+                     lineOptions.yaxes[iVar] = {
+                    //label: response.data[numb].label.split("_"),
+                    label: testo,
+                    tickFormatter: function(val, axis) { return val < axis.max ? val.toFixed(axis.tickDecimals) : lineOptions.yaxes[axis.n - 1].label; }
+                   };
+                    iVar++;
+                }
 
             that.flotMultiData = series; //esto lo vaciaba
             that.flotMultiData = response.data;
@@ -150,8 +162,8 @@ var position = 'right';
 //                that.flotMultiOptions = lineOptions;
 //            this.flotMultiOptions = {"xaxes":[{"mode":"time"}],"legend":{"position":"sw"},"colors":["#47ACB1","#F26522","#FFCD33","#676766","#ADD5D7","#F9AA7B","#FFE8AF","#A5A8AA"],"grid":{"color":"#999999","hoverable":true,"clickable":true,"tickColor":"#D4D4D4","borderWidth":0},"tooltip":true,"tooltipOpts":{"content":"%s for %x was %y","xDateFormat":"%y-%m-%d"},"yaxes":[{"label":"Feed.X3"},{"label":"Force.X2"},{"label":"Interval"}]};
         }
-        , AjaxErrorHandler($window, "Error"));
-    }
+        
+    }, AjaxErrorHandler($window, "Error"));}
     
 
     function getProgramsAndVars(){
