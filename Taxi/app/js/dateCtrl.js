@@ -10,7 +10,6 @@ function DateCtrl($scope, dateService){
     vm.bThisPeriod = true;
 
     vm.updateLabel = function(){
-        console.log("Porque me vienes aqui")
         if (vm.period == 'all'){
             if (vm.currentDay.year() == moment().year())
                 vm.currentDayLabel = vm.currentDay.format("MMMM");
